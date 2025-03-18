@@ -4,7 +4,9 @@ class Markdown
   end
 
   def to_html
-    if @content.start_with?("###")
+    if @content.start_with?("####")
+      heading("####", text_after("####"))
+    elsif @content.start_with?("###")
       heading("###", text_after("###"))
     elsif @content.start_with?("##")
       heading("##", text_after("##"))
@@ -19,7 +21,8 @@ class Markdown
     tags = {
       "#" => { start: "<h1>", end: "</h1>" },
       "##" => { start: "<h2>", end: "</h2>" },
-      "###" => { start: "<h3>", end: "</h3>" }
+      "###" => { start: "<h3>", end: "</h3>" },
+      "####" => { start: "<h4>", end: "</h4>" }
     }
     tag = tags[token]
     tag[:start] + inline_text + tag[:end]
