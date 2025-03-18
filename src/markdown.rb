@@ -5,26 +5,24 @@ class Markdown
 
   def to_html
     if @content.start_with?("###")
-      heading_three(text_after("###"))
+      heading("###", text_after("###"))
     elsif @content.start_with?("##")
-      heading_two(text_after("##"))
+      heading("##", text_after("##"))
     else
-      heading_one(text_after("#"))
+      heading("#", text_after("#"))
     end
   end
 
   private
 
-  def heading_one(text)
-    "<h1>" + text + "</h1>"
-  end
-
-  def heading_two(text)
-    "<h2>" + text + "</h2>"
-  end
-
-  def heading_three(text)
-    "<h3>" + text + "</h3>"
+  def heading(token, inline_text)
+    tags = {
+      "#" => { start: "<h1>", end: "</h1>" },
+      "##" => { start: "<h2>", end: "</h2>" },
+      "###" => { start: "<h3>", end: "</h3>" }
+    }
+    tag = tags[token]
+    tag[:start] + inline_text + tag[:end]
   end
 
   def text_after(token)
