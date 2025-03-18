@@ -1,12 +1,18 @@
+require_relative 'text.rb'
 module Html
-
-  private
+  include Text
 
   def heading_marker_to_html(line)
     marker = line[/^#+(?=\s)/]
     inline_text = text_after(marker, line)
     heading(marker, inline_text)
   end
+
+  def bold_markers_to_html(line)
+    line.gsub(/(\*\*(.*?)\*\*)|(__([^_]+)__)/, '<b>\2\4</b>')
+  end
+
+  private
 
   def heading(marker, inline_text)
     tags = {
@@ -19,13 +25,5 @@ module Html
     }
     tag = tags[marker]
     tag[:start] + inline_text + tag[:end]
-  end
-
-  def bold_markers_to_html(line)
-    line.gsub(/(\*\*(.*?)\*\*)|(__([^_]+)__)/, '<b>\2\4</b>')
-  end
-
-  def text_after(token, line)
-    line.sub(/^#{Regexp.escape(token)}+\s*/, "")
   end
 end
