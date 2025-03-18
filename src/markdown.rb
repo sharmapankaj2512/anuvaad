@@ -4,11 +4,15 @@ class Markdown
   end
 
   def to_html
-    if @content.start_with?("#")
-      marker = @content[/^#+(?=\s)/]
-      inline_text = text_after(marker)
-      heading(marker, inline_text)
-    end
+    html = ""
+    @content.split("\n").each { |line|
+      if @content.start_with?("#")
+        marker = line[/^#+(?=\s)/]
+        inline_text = text_after(marker, line)
+        html << heading(marker, inline_text)
+      end
+    }
+    html
   end
 
   private
@@ -26,7 +30,7 @@ class Markdown
     tag[:start] + inline_text + tag[:end]
   end
 
-  def text_after(token)
-    @content.sub(/^#{Regexp.escape(token)}+\s*/, "")
+  def text_after(token, line)
+    line.sub(/^#{Regexp.escape(token)}+\s*/, "")
   end
 end
