@@ -19,7 +19,8 @@ class Markdown
       "##" => { start: "<h2>", end: "</h2>" },
       "###" => { start: "<h3>", end: "</h3>" },
       "####" => { start: "<h4>", end: "</h4>" },
-      "#####" => { start: "<h5>", end: "</h5>" }
+      "#####" => { start: "<h5>", end: "</h5>" },
+      "######" => { start: "<h6>", end: "</h6>" }
     }
     tag = tags[marker]
     tag[:start] + inline_text + tag[:end]
