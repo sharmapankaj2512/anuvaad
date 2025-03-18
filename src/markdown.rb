@@ -5,7 +5,7 @@ class Markdown
 
   def to_html
     if @content.start_with?("##")
-      "<h2>The ultimate heading</h2>"
+      heading_two(text_after("##"))
     else
       heading_one(text_after("#"))
     end
@@ -15,6 +15,10 @@ class Markdown
 
   def heading_one(text)
     "<h1>" + text + "</h1>"
+  end
+
+  def heading_two(text)
+    "<h2>" + text + "</h2>"
   end
 
   def text_after(token)
