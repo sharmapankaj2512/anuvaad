@@ -34,7 +34,8 @@ class HeadingsTest < Minitest::Test
   end
 
   def test_heading_multiline
-    assert_equal Markdown.new("# The ultimate heading\n### Tomorrow never dies").to_html, "<h1>The ultimate heading</h1><h3>Tomorrow never dies</h3>"
+    markdown = Markdown.new("# The ultimate heading\n### Tomorrow never dies")
+    assert_equal markdown.to_html, "<h1>The ultimate heading</h1><h3>Tomorrow never dies</h3>"
   end
 end
 
