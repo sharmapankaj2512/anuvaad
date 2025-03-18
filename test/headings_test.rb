@@ -8,12 +8,5 @@ class HeadingsTest < Minitest::Test
   end
 end
 
-class Markdown
-  def initialize(content)
-    @content = content
-  end
+require_relative 'markdown.rb'
 
-  def to_html
-    "<h1>The ultimate heading</h1>"
-  end
-end
