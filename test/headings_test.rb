@@ -12,6 +12,11 @@ class HeadingsTest < Minitest::Test
     assert_equal Markdown.new("## The ultimate heading").to_html, "<h2>The ultimate heading</h2>"
     assert_equal Markdown.new("## Tomorrow never dies").to_html, "<h2>Tomorrow never dies</h2>"
   end
+
+  def test_heading_three
+    assert_equal Markdown.new("### The ultimate heading").to_html, "<h3>The ultimate heading</h3>"
+    assert_equal Markdown.new("### Tomorrow never dies").to_html, "<h3>Tomorrow never dies</h3>"
+  end
 end
 
 require_relative '../src/markdown.rb'
