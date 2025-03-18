@@ -17,10 +17,6 @@ class Markdown
 
   private
 
-  def bold_markers_to_html(line)
-    line.gsub(/(\*\*(.*?)\*\*)|(__([^_]+)__)/, '<b>\2\4</b>')
-  end
-
   def is_heading_marker
     @content.start_with?("#")
   end
@@ -47,6 +43,10 @@ class Markdown
     }
     tag = tags[marker]
     tag[:start] + inline_text + tag[:end]
+  end
+
+  def bold_markers_to_html(line)
+    line.gsub(/(\*\*(.*?)\*\*)|(__([^_]+)__)/, '<b>\2\4</b>')
   end
 
   def text_after(token, line)
