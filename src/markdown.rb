@@ -9,13 +9,17 @@ class Markdown
       if is_heading_marker
         html << heading_marker_to_html(line)
       elsif contains_bold_marker(line)
-        html << line.gsub(/(\*\*(.*?)\*\*)|(__([^_]+)__)/, '<b>\2\4</b>')
+        html << bold_markers_to_html(line)
       end
     }
     html
   end
 
   private
+
+  def bold_markers_to_html(line)
+    line.gsub(/(\*\*(.*?)\*\*)|(__([^_]+)__)/, '<b>\2\4</b>')
+  end
 
   def is_heading_marker
     @content.start_with?("#")
