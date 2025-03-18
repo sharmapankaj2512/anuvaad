@@ -7,11 +7,15 @@ class Markdown
     if @content.start_with?("##")
       "<h2>The ultimate heading</h2>"
     else
-      "<h1>" + text_after("#") + "</h1>"
+      heading_one(text_after("#"))
     end
   end
 
   private
+
+  def heading_one(text)
+    "<h1>" + text + "</h1>"
+  end
 
   def text_after(token)
     @content.sub(/^#{Regexp.escape(token)}+\s*/, "")
