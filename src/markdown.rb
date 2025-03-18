@@ -6,13 +6,14 @@ class Markdown
   def to_html
     if @content.start_with?("#")
       marker = @content[/^#+(?=\s)/]
-      heading(marker)
+      inline_text = text_after(marker)
+      heading(marker, inline_text)
     end
   end
 
   private
 
-  def heading(marker)
+  def heading(marker, inline_text)
     tags = {
       "#" => { start: "<h1>", end: "</h1>" },
       "##" => { start: "<h2>", end: "</h2>" },
@@ -20,7 +21,6 @@ class Markdown
       "####" => { start: "<h4>", end: "</h4>" }
     }
     tag = tags[marker]
-    inline_text = text_after(marker)
     tag[:start] + inline_text + tag[:end]
   end
 
