@@ -7,15 +7,19 @@ class Markdown
     html = ""
     @content.split("\n").each { |line|
       if is_heading_marker
-        marker = line[/^#+(?=\s)/]
-        inline_text = text_after(marker, line)
-        html << heading(marker, inline_text)
+        html << heading_marker_to_html(line)
       end
     }
     html
   end
 
   private
+
+  def heading_marker_to_html(line)
+    marker = line[/^#+(?=\s)/]
+    inline_text = text_after(marker, line)
+    heading = heading(marker, inline_text)
+  end
 
   def is_heading_marker
     @content.start_with?("#")
