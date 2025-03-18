@@ -8,6 +8,8 @@ class Markdown
     @content.split("\n").each { |line|
       if is_heading_marker
         html << heading_marker_to_html(line)
+      elsif contains_bold_marker(line)
+        html << line.gsub(/(\*\*(.*?)\*\*)|(__([^_]+)__)/, '<b>\2\4</b>')
       end
     }
     html
@@ -15,14 +17,19 @@ class Markdown
 
   private
 
+  def is_heading_marker
+    @content.start_with?("#")
+  end
+
+  def contains_bold_marker(line)
+    pattern = /(\*\*.*?\*\*)|(__.*?__)/
+    line.match?(pattern)
+  end
+
   def heading_marker_to_html(line)
     marker = line[/^#+(?=\s)/]
     inline_text = text_after(marker, line)
-    heading = heading(marker, inline_text)
-  end
-
-  def is_heading_marker
-    @content.start_with?("#")
+    heading(marker, inline_text)
   end
 
   def heading(marker, inline_text)
