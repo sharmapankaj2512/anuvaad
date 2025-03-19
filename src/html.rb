@@ -1,4 +1,7 @@
-require_relative 'text.rb'
+# frozen_string_literal: true
+
+require_relative 'text'
+
 module Html
   include Text
 
