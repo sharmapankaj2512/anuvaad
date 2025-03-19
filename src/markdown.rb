@@ -1,4 +1,4 @@
-require_relative 'html.rb'
+require_relative 'html'
 
 class Markdown
   include Html
