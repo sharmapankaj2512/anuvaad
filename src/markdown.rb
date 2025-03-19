@@ -10,7 +10,7 @@ class Markdown
   end
 
   def to_html
-    html = ''
+    html = String.new
     @content.split("\n").each { |line|
       if is_heading_marker
         html << heading_marker_to_html(line)
