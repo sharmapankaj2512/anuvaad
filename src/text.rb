@@ -5,6 +5,6 @@ module Text
   private
 
   def text_after(token, line)
-    line.sub(/^#{Regexp.escape(token)}+\s*/, "")
+    line.sub(/^#{Regexp.escape(token)}+\s*/, '')
   end
 end
