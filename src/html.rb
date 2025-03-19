@@ -11,6 +11,12 @@ module Html
     heading(marker, inline_text)
   end
 
+  def unordered_list_marker_to_html(line)
+    marker = line[/^-+(?=\s)/]
+    inline_text = text_after(marker, line)
+    "<li>#{inline_text}</li>"
+  end
+
   def bold_markers_to_html(line)
     line.gsub(/(\*\*(.*?)\*\*)|(__([^_]+)__)/, '<b>\2\4</b>')
   end

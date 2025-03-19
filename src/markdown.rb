@@ -18,6 +18,10 @@ class Markdown
         html << bold_markers_to_html(line)
       elsif contains_italic_marker(line)
         html << italic_markers_to_html(line)
+      elsif contains_unordered_list_marker(line)
+        html << '<ul>'
+        html << unordered_list_marker_to_html(line)
+        html << '</ul>'
       end
     }
     html
@@ -27,6 +31,10 @@ class Markdown
 
   def is_heading_marker
     @content.start_with?('#')
+  end
+
+  def contains_unordered_list_marker(line)
+    line.start_with?('-')
   end
 
   def contains_bold_marker(line)
