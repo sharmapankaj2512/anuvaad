@@ -12,6 +12,10 @@ module Html
     line.gsub(/(\*\*(.*?)\*\*)|(__([^_]+)__)/, '<b>\2\4</b>')
   end
 
+  def italic_markers_to_html(line)
+    line.gsub(/(\*(.*?)\*)|(_(.*?)_)/, '<i>\2\4</i>')
+  end
+
   private
 
   def heading(marker, inline_text)
