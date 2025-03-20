@@ -25,11 +25,15 @@ class Markdown
         html << italic_markers_to_html(line)
         index += 1
       elsif contains_unordered_list_marker(line)
-        html << '<ul>'
+        list_items = []
         while contains_unordered_list_marker(line)
-          html << unordered_list_marker_to_html(line)
+          list_items << line
           index += 1
           line = lines[index]
+        end
+        html << '<ul>'
+        list_items.each do |list_item|
+          html << unordered_list_marker_to_html(list_item)
         end
         html << '</ul>'
       end
