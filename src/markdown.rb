@@ -31,17 +31,22 @@ class Markdown
           index += 1
           line = lines[index]
         end
-        html << '<ul>'
-        list_items.each do |list_item|
-          html << unordered_list_marker_to_html(list_item)
-        end
-        html << '</ul>'
+        html << unordered_list_items_to_html(list_items)
       end
     end
     html
   end
 
   private
+
+  def unordered_list_items_to_html(list_items)
+    html = String.new('<ul>')
+    list_items.each do |list_item|
+      html << unordered_list_marker_to_html(list_item)
+    end
+    html << '</ul>'
+    html
+  end
 
   def is_heading_marker
     @content.start_with?('#')
