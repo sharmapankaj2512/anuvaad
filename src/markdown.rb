@@ -25,12 +25,7 @@ class Markdown
         html << italic_markers_to_html(line)
         index += 1
       elsif contains_unordered_list_marker(line)
-        list_items = []
-        while contains_unordered_list_marker(line)
-          list_items << line
-          index += 1
-          line = lines[index]
-        end
+        list_items, index = unordered_list_markers(index, line, lines)
         html << unordered_list_items_to_html(list_items)
       end
     end
@@ -38,6 +33,17 @@ class Markdown
   end
 
   private
+
+  def unordered_list_markers(start_index, line, lines)
+    index = start_index
+    list_items = []
+    while contains_unordered_list_marker(line)
+      list_items << line
+      index += 1
+      line = lines[index]
+    end
+    [list_items, index]
+  end
 
   def unordered_list_items_to_html(list_items)
     html = String.new('<ul>')
