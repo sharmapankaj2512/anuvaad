@@ -25,6 +25,15 @@ module Html
     line.gsub(/(\*(.*?)\*)|(_(.*?)_)/, '<i>\2\4</i>')
   end
 
+  def unordered_list_items_to_html(list_items)
+    html = String.new('<ul>')
+    list_items.each do |list_item|
+      html << unordered_list_marker_to_html(list_item)
+    end
+    html << '</ul>'
+    html
+  end
+
   private
 
   def heading(marker, inline_text)
