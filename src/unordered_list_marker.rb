@@ -1,4 +1,4 @@
-class UnorderedListMarker
+class ListMarker
   include Text
 
   def initialize(line, lines, current_line_index)
@@ -15,7 +15,7 @@ class UnorderedListMarker
   def unordered_list_markers(start_index, line, lines)
     index = start_index
     list_items = []
-    while UnorderedListMarker.is_present(line)
+    while ListMarker.is_present(line)
       list_items << line
       index += 1
       line = lines[index]
