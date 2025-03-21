@@ -11,14 +11,21 @@ class Markdown
     lines = @content.split("\n")
     current_line_index = 0
     while current_line_index < lines.length
-      line = lines[current_line_index]
-      raw_line = RawLine.new(line)
-      mark_down = raw_line.to_markdown(lines, current_line_index)
-      html_content, lines_processed = mark_down.to_html
-      html << html_content
+      html_content, lines_processed = to_html_line(current_line_index, lines)
       current_line_index += lines_processed
+      html << html_content
     end
     html
+  end
+
+  private
+
+  def to_html_line(current_line_index, lines)
+    line = lines[current_line_index]
+    raw_line = RawLine.new(line)
+    mark_down = raw_line.to_markdown(lines, current_line_index)
+    html_content, lines_processed = mark_down.to_html
+    return html_content, lines_processed
   end
 
 end
