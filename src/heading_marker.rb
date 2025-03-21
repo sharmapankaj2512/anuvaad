@@ -1,3 +1,5 @@
+require_relative 'text'
+
 class HeadingMarker
   include Text
 

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'html'
-
 class Markdown
 
   def initialize(content)
@@ -34,3 +32,4 @@ require_relative 'bold_marker.rb'
 require_relative 'italic_marker.rb'
 
 require_relative 'unordered_list_marker.rb'
+
