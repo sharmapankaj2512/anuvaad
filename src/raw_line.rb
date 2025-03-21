@@ -8,6 +8,6 @@ class RawLine
     return ItalicMarker.new(@line, lines, current_line_index) if ItalicMarker.is_present(@line)
     return UnorderedListMarker.new(@line, lines, current_line_index) if UnorderedListMarker.is_present(@line)
 
-    HeadingMarker.new(@line, lines, current_line_index) if HeadingMarker.is_heading_marker(@line)
+    HeadingMarker.new(@line, lines, current_line_index) if HeadingMarker.is_present(@line)
   end
 end

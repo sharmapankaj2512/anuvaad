@@ -9,7 +9,7 @@ class HeadingMarker
     @index = current_line_index
   end
 
-  def self.is_heading_marker(line)
+  def self.is_present(line)
     line.start_with?('#')
   end
 
