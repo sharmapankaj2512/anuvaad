@@ -75,8 +75,15 @@ class RawLine
   end
 
   def to_markdown(lines, current_line_index)
+    return unless is_heading_marker
+
     HeadingMarker.new(@line, lines, current_line_index)
   end
+
+  def is_heading_marker
+    @line.start_with?('#')
+  end
+
 end
 
 class HeadingMarker
