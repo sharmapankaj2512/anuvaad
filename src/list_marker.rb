@@ -32,13 +32,13 @@ class ListMarker
   def unordered_list_items_to_html(list_items)
     html = String.new(@start_tag)
     list_items.each do |list_item|
-      html << unordered_list_marker_to_html(list_item)
+      html << list_marker_to_html(list_item)
     end
     html << @end_tag
     html
   end
 
-  def unordered_list_marker_to_html(line)
+  def list_marker_to_html(line)
     marker = line[/^-+(?=\s)/]
     inline_text = text_after(marker, line)
     "<li>#{inline_text}</li>"
