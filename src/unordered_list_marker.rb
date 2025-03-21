@@ -15,7 +15,7 @@ class UnorderedListMarker
   def unordered_list_markers(start_index, line, lines)
     index = start_index
     list_items = []
-    while UnorderedListMarker.contains_unordered_list_marker(line)
+    while UnorderedListMarker.is_present(line)
       list_items << line
       index += 1
       line = lines[index]
@@ -38,7 +38,7 @@ class UnorderedListMarker
     "<li>#{inline_text}</li>"
   end
 
-  def self.contains_unordered_list_marker(line)
+  def self.is_present(line)
     return false if line.nil?
 
     line.start_with?('-')
