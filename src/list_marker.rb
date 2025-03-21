@@ -14,11 +14,11 @@ class ListMarker
   end
 
   def to_html
-    list_items, index = unordered_list_markers(@index, @line, @lines)
-    [unordered_list_items_to_html(list_items), index]
+    marked_list_items, lines_processed = list_markers(@index, @line, @lines)
+    [unordered_list_items_to_html(marked_list_items), lines_processed]
   end
 
-  def unordered_list_markers(start_index, line, lines)
+  def list_markers(start_index, line, lines)
     index = start_index
     list_items = []
     while ListMarker.is_present(line)
