@@ -3,7 +3,6 @@
 require_relative 'html'
 
 class Markdown
-  include Html
 
   def initialize(content)
     @content = content
@@ -66,7 +65,7 @@ class RawLine
   def to_markdown(lines, current_line_index)
     return BoldMarker.new(@line, lines, current_line_index) if contains_bold_marker(@line)
     return ItalicMarker.new(@line, lines, current_line_index) if contains_italic_marker(@line)
-    return UnorderedListMarker.new(@line, lines, current_line_index) if contains_unordered_list_marker(@line)
+    return UnorderedListMarker.new(@line, lines, current_line_index) if UnorderedListMarker.contains_unordered_list_marker(@line)
 
     HeadingMarker.new(@line, lines, current_line_index) if is_heading_marker
   end
@@ -83,12 +82,6 @@ class RawLine
   def contains_italic_marker(line)
     pattern = /(\*[^*]+\*)|(_[^_]+_)/
     line.match?(pattern)
-  end
-
-  def contains_unordered_list_marker(line)
-    return false if line.nil?
-
-    line.start_with?('-')
   end
 end
 
@@ -172,7 +165,7 @@ class UnorderedListMarker
   def unordered_list_markers(start_index, line, lines)
     index = start_index
     list_items = []
-    while contains_unordered_list_marker(line)
+    while UnorderedListMarker.contains_unordered_list_marker(line)
       list_items << line
       index += 1
       line = lines[index]
@@ -195,7 +188,7 @@ class UnorderedListMarker
     "<li>#{inline_text}</li>"
   end
 
-  def contains_unordered_list_marker(line)
+  def self.contains_unordered_list_marker(line)
     return false if line.nil?
 
     line.start_with?('-')
