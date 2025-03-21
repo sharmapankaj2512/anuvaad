@@ -9,14 +9,14 @@ class Markdown
   def to_html
     html = String.new
     lines = @content.split("\n")
-    index = 0
-    while index < lines.length
-      line = lines[index]
+    current_line_index = 0
+    while current_line_index < lines.length
+      line = lines[current_line_index]
       raw_line = RawLine.new(line)
-      mark_down = raw_line.to_markdown(lines, index)
+      mark_down = raw_line.to_markdown(lines, current_line_index)
       content, lines_processed = mark_down.to_html
       html << content
-      index += lines_processed
+      current_line_index += lines_processed
     end
     html
   end
