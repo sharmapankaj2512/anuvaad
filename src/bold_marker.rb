@@ -17,6 +17,7 @@ class BoldMarker
   private
 
   def bold_tags
-    @line.gsub(/(\*\*(.*?)\*\*)|(__([^_]+)__)/, '<b>\2\4</b>')
+    content_between_markers = /(\*\*(.*?)\*\*)|(__([^_]+)__)/
+    @line.gsub(content_between_markers, '<b>\2\4</b>')
   end
 end
