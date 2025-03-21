@@ -16,8 +16,11 @@ class Markdown
     while index < lines.length
       line = lines[index]
       if is_heading_marker
-        html << heading_marker_to_html(line)
-        index += 1
+        raw_line = RawLine.new(line)
+        mark_down = raw_line.to_markdown(lines, index)
+        content, lines_processed = mark_down.to_html
+        html << content
+        index += lines_processed
       elsif contains_bold_marker(line)
         html << bold_markers_to_html(line)
         index += 1
@@ -63,5 +66,44 @@ class Markdown
   def contains_italic_marker(line)
     pattern = /(\*[^*]+\*)|(_[^_]+_)/
     line.match?(pattern)
+  end
+end
+
+class RawLine
+  def initialize(line)
+    @line = line
+  end
+
+  def to_markdown(lines, current_line_index)
+    HeadingMarker.new(@line, lines, current_line_index)
+  end
+end
+
+class HeadingMarker
+  include Text
+
+  def initialize(line, lines, current_line_index)
+    @line = line
+    @lines = lines
+    @index = current_line_index
+  end
+
+  def to_html
+    marker = @line[/^#+(?=\s)/]
+    inline_text = text_after(marker, @line)
+    [heading(marker, inline_text), 1]
+  end
+
+  def heading(marker, inline_text)
+    tags = {
+      '#' => { start: '<h1>', end: '</h1>' },
+      '##' => { start: '<h2>', end: '</h2>' },
+      '###' => { start: '<h3>', end: '</h3>' },
+      '####' => { start: '<h4>', end: '</h4>' },
+      '#####' => { start: '<h5>', end: '</h5>' },
+      '######' => { start: '<h6>', end: '</h6>' }
+    }
+    tag = tags[marker]
+    tag[:start] + inline_text + tag[:end]
   end
 end
