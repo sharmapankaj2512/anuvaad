@@ -6,8 +6,8 @@ class BoldMarker
   end
 
   def self.contains_bold_marker(line)
-    pattern = /(\*\*.*?\*\*)|(__.*?__)/
-    line.match?(pattern)
+    star_or_underscore_pair = /(\*\*.*?\*\*)|(__.*?__)/
+    line.match?(star_or_underscore_pair)
   end
 
   def to_html
