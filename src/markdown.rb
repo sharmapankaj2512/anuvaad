@@ -15,31 +15,11 @@ class Markdown
     index = 0
     while index < lines.length
       line = lines[index]
-      if is_heading_marker
-        raw_line = RawLine.new(line)
-        mark_down = raw_line.to_markdown(lines, index)
-        content, lines_processed = mark_down.to_html
-        html << content
-        index += lines_processed
-      elsif contains_bold_marker(line)
-        raw_line = RawLine.new(line)
-        mark_down = raw_line.to_markdown(lines, index)
-        content, lines_processed = mark_down.to_html
-        html << content
-        index += lines_processed
-      elsif contains_italic_marker(line)
-        raw_line = RawLine.new(line)
-        mark_down = raw_line.to_markdown(lines, index)
-        content, lines_processed = mark_down.to_html
-        html << content
-        index += lines_processed
-      elsif contains_unordered_list_marker(line)
-        raw_line = RawLine.new(line)
-        mark_down = raw_line.to_markdown(lines, index)
-        content, lines_processed = mark_down.to_html
-        html << content
-        index += lines_processed
-      end
+      raw_line = RawLine.new(line)
+      mark_down = raw_line.to_markdown(lines, index)
+      content, lines_processed = mark_down.to_html
+      html << content
+      index += lines_processed
     end
     html
   end
