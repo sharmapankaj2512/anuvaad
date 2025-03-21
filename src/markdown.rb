@@ -25,12 +25,6 @@ class Markdown
 
   private
 
-  def contains_unordered_list_marker(line)
-    return false if line.nil?
-
-    line.start_with?('-')
-  end
-
   def contains_bold_marker(line)
     pattern = /(\*\*.*?\*\*)|(__.*?__)/
     line.match?(pattern)
