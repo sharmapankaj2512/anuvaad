@@ -14,8 +14,8 @@ class Markdown
       line = lines[current_line_index]
       raw_line = RawLine.new(line)
       mark_down = raw_line.to_markdown(lines, current_line_index)
-      content, lines_processed = mark_down.to_html
-      html << content
+      html_content, lines_processed = mark_down.to_html
+      html << html_content
       current_line_index += lines_processed
     end
     html
