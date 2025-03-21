@@ -32,7 +32,7 @@ class RawLine
 
   def to_markdown(lines, current_line_index)
     return BoldMarker.new(@line, lines, current_line_index) if contains_bold_marker(@line)
-    return ItalicMarker.new(@line, lines, current_line_index) if contains_italic_marker(@line)
+    return ItalicMarker.new(@line, lines, current_line_index) if ItalicMarker.contains_italic_marker(@line)
     return UnorderedListMarker.new(@line, lines, current_line_index) if UnorderedListMarker.contains_unordered_list_marker(@line)
 
     HeadingMarker.new(@line, lines, current_line_index) if HeadingMarker.is_heading_marker(@line)
@@ -43,10 +43,6 @@ class RawLine
     line.match?(pattern)
   end
 
-  def contains_italic_marker(line)
-    pattern = /(\*[^*]+\*)|(_[^_]+_)/
-    line.match?(pattern)
-  end
 end
 
 class HeadingMarker
@@ -105,6 +101,11 @@ class ItalicMarker
     @line = line
     @lines = lines
     @index = current_line_index
+  end
+
+  def self.contains_italic_marker(line)
+    pattern = /(\*[^*]+\*)|(_[^_]+_)/
+    line.match?(pattern)
   end
 
   def to_html
