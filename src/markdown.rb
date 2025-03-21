@@ -35,11 +35,7 @@ class RawLine
     return ItalicMarker.new(@line, lines, current_line_index) if contains_italic_marker(@line)
     return UnorderedListMarker.new(@line, lines, current_line_index) if UnorderedListMarker.contains_unordered_list_marker(@line)
 
-    HeadingMarker.new(@line, lines, current_line_index) if is_heading_marker
-  end
-
-  def is_heading_marker
-    @line.start_with?('#')
+    HeadingMarker.new(@line, lines, current_line_index) if HeadingMarker.is_heading_marker(@line)
   end
 
   def contains_bold_marker(line)
@@ -60,6 +56,10 @@ class HeadingMarker
     @line = line
     @lines = lines
     @index = current_line_index
+  end
+
+  def self.is_heading_marker(line)
+    line.start_with?('#')
   end
 
   def to_html
