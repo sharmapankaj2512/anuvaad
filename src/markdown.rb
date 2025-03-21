@@ -23,12 +23,6 @@ class Markdown
     html
   end
 
-  private
-
-  def contains_italic_marker(line)
-    pattern = /(\*[^*]+\*)|(_[^_]+_)/
-    line.match?(pattern)
-  end
 end
 
 class RawLine
