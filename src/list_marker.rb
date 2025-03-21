@@ -9,10 +9,6 @@ class ListMarker
     @end_tag = end_tag
   end
 
-  def unordered(line, lines, current_line_index)
-    initialize(line, lines, current_line_index, '<ul>', '</ul>')
-  end
-
   def to_html
     marked_list_items, lines_processed = list_markers(@index, @line, @lines)
     [list_items_to_html(marked_list_items), lines_processed]
@@ -48,5 +44,11 @@ class ListMarker
     return false if line.nil?
 
     line.start_with?('-')
+  end
+end
+
+class UnorderedListItems < ListMarker
+  def initialize(line, lines, current_line_index, start_tag, end_tag)
+    super(line, lines, current_line_index, '<ul>', '</ul>')
   end
 end
