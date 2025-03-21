@@ -9,7 +9,7 @@ class ListMarker
 
   def to_html
     list_items, index = list_markers(@index, @line, @lines)
-    [unordered_list_items_to_html(list_items), index]
+    [list_items_to_html(list_items), index]
   end
 
   def list_markers(start_index, line, lines)
@@ -23,7 +23,7 @@ class ListMarker
     [list_items, index]
   end
 
-  def unordered_list_items_to_html(list_items)
+  def list_items_to_html(list_items)
     html = String.new('<ul>')
     list_items.each do |list_item|
       html << list_marker_to_html(list_item)
