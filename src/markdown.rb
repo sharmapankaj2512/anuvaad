@@ -25,17 +25,6 @@ class Markdown
 
   private
 
-  def unordered_list_markers(start_index, line, lines)
-    index = start_index
-    list_items = []
-    while contains_unordered_list_marker(line)
-      list_items << line
-      index += 1
-      line = lines[index]
-    end
-    [list_items, index]
-  end
-
   def is_heading_marker
     @content.start_with?('#')
   end
