@@ -5,7 +5,7 @@ class ItalicMarker
     @index = current_line_index
   end
 
-  def self.contains_italic_marker(line)
+  def self.is_present(line)
     pattern = /(\*[^*]+\*)|(_[^_]+_)/
     line.match?(pattern)
   end

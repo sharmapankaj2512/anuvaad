@@ -5,7 +5,7 @@ class BoldMarker
     @index = current_line_index
   end
 
-  def self.contains_bold_marker(line)
+  def self.is_present(line)
     star_or_underscore_pair = /(\*\*.*?\*\*)|(__.*?__)/
     line.match?(star_or_underscore_pair)
   end
