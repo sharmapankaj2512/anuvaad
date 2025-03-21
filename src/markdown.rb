@@ -25,11 +25,6 @@ class Markdown
 
   private
 
-  def contains_bold_marker(line)
-    pattern = /(\*\*.*?\*\*)|(__.*?__)/
-    line.match?(pattern)
-  end
-
   def contains_italic_marker(line)
     pattern = /(\*[^*]+\*)|(_[^_]+_)/
     line.match?(pattern)
