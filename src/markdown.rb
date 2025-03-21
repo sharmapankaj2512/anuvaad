@@ -25,18 +25,18 @@ class Markdown
     raw_line = RawLine.new(line)
     mark_down = raw_line.to_markdown(lines, current_line_index)
     html_content, lines_processed = mark_down.to_html
-    return html_content, lines_processed
+    [html_content, lines_processed]
   end
 
 end
 
-require_relative 'raw_line.rb'
+require_relative 'raw_line'
 
-require_relative 'heading_marker.rb'
+require_relative 'heading_marker'
 
-require_relative 'bold_marker.rb'
+require_relative 'bold_marker'
 
-require_relative 'italic_marker.rb'
+require_relative 'italic_marker'
 
-require_relative 'unordered_list_marker.rb'
+require_relative 'unordered_list_marker'
 
