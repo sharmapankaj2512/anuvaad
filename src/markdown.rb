@@ -25,10 +25,6 @@ class Markdown
 
   private
 
-  def is_heading_marker
-    @content.start_with?('#')
-  end
-
   def contains_unordered_list_marker(line)
     return false if line.nil?
 
