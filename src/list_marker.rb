@@ -1,3 +1,5 @@
+require_relative 'text'
+
 class ListMarker
   include Text
 
@@ -17,7 +19,7 @@ class ListMarker
   def list_markers(start_index, line, lines)
     index = start_index
     list_items = []
-    while ListMarker.is_present(line)
+    while self.class.is_present(line)
       list_items << line
       index += 1
       line = lines[index]
@@ -35,9 +37,21 @@ class ListMarker
   end
 
   def list_marker_to_html(line)
-    marker = line[/^-+(?=\s)/]
+    marker = marker_pattern(line)
     inline_text = text_after(marker, line)
     "<li>#{inline_text}</li>"
+  end
+
+  private
+
+  def marker_pattern(line)
+    line[/^-+(?=\s)/]
+  end
+end
+
+class UnorderedListItems < ListMarker
+  def initialize(line, lines, current_line_index)
+    super(line, lines, current_line_index, '<ul>', '</ul>')
   end
 
   def self.is_present(line)
@@ -47,8 +61,20 @@ class ListMarker
   end
 end
 
-class UnorderedListItems < ListMarker
-  def initialize(line, lines, current_line_index, start_tag, end_tag)
-    super(line, lines, current_line_index, '<ul>', '</ul>')
+class OrderedListItems < ListMarker
+  def initialize(line, lines, current_line_index)
+    super(line, lines, current_line_index, '<ol>', '</ol>')
+  end
+
+  def self.is_present(line)
+    return false if line.nil?
+
+    line =~ /^\d+\.\s/
+  end
+
+  private
+
+  def marker_pattern(line)
+    line[/^\d+\.(?=\s)/]
   end
 end
