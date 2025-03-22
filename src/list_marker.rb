@@ -16,11 +16,11 @@ class ListMarker
   end
 
   def to_html
-    marked_list_items, lines_processed = list_markers(@index, @line, @lines)
-    [list_items_to_html(marked_list_items), lines_processed]
+    marked_list_items = group_list_items(@index, @line, @lines)
+    [list_items_to_html(marked_list_items), marked_list_items.length]
   end
 
-  def list_markers(start_index, line, lines)
+  def group_list_items(start_index, line, lines)
     index = start_index
     list_items = []
     while self.class.present?(line)
@@ -28,7 +28,7 @@ class ListMarker
       index += 1
       line = lines[index]
     end
-    [list_items, index]
+    list_items
   end
 
   def list_items_to_html(list_items)
