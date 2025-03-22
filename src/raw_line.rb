@@ -10,7 +10,7 @@ class RawLine
   end
 
   def to_markdown
-    return BoldMarker.new(@line, @lines, @current_line_index) if BoldMarker.present?(@line)
+    return BoldMarker.new(@lines, @current_line_index) if BoldMarker.present?(@line)
     return ItalicMarker.new(@line, @lines, @current_line_index) if ItalicMarker.present?(@line)
     return ListMarker.make(@line, @lines, @current_line_index) if ListMarker.present?(@line)
 

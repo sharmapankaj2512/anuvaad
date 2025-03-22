@@ -3,8 +3,8 @@
 # Handles conversion of bold markdown syntax to HTML
 # Processes both ** and __ style bold markers to <b> tags
 class BoldMarker
-  def initialize(line, lines, current_line_index)
-    @line = line
+  def initialize(lines, current_line_index)
+    @line = lines[current_line_index]
     @lines = lines
     @index = current_line_index
   end
