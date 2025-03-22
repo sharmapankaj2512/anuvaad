@@ -43,12 +43,9 @@ class ListMarker
   end
 
   def self.make(line, lines, current_line_index)
-    if UnorderedListItems.is_present(line)
-      return UnorderedListItems.new(line, lines, current_line_index)
-    end
-    if OrderedListItems.is_present(line)
-      return OrderedListItems.new(line, lines, current_line_index)
-    end
+    return UnorderedListItems.new(line, lines, current_line_index) if UnorderedListItems.is_present(line)
+
+    OrderedListItems.new(line, lines, current_line_index) if OrderedListItems.is_present(line)
   end
 
   def self.is_present(line)
