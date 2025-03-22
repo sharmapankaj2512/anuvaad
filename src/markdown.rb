@@ -26,8 +26,8 @@ class Markdown
 
   def to_html_line(current_line_index, lines)
     line = lines[current_line_index]
-    raw_line = RawLine.new(line)
-    mark_down = raw_line.to_markdown(lines, current_line_index)
+    raw_line = RawLine.new(lines, current_line_index)
+    mark_down = raw_line.to_markdown
     html_content, lines_processed = mark_down.to_html
     [html_content, lines_processed]
   end
