@@ -46,7 +46,8 @@ class ListMarker
     "<li>#{inline_text}</li>"
   end
 
-  def self.make(line, lines, current_line_index)
+  def self.make(lines, current_line_index)
+    line = lines[current_line_index]
     return UnorderedListItems.new(line, lines, current_line_index) if UnorderedListItems.present?(line)
 
     OrderedListItems.new(line, lines, current_line_index) if OrderedListItems.present?(line)
