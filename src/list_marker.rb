@@ -42,29 +42,52 @@ class ListMarker
     "<li>#{inline_text}</li>"
   end
 
+  def self.make(line, lines, current_line_index)
+    if UnorderedListItems.is_present(line)
+      return UnorderedListItems.new(line, lines, current_line_index)
+    end
+    if OrderedListItems.is_present(line)
+      return OrderedListItems.new(line, lines, current_line_index)
+    end
+  end
+
+  def self.is_present(line)
+    UnorderedListItems.is_present(line) || OrderedListItems.is_present(line)
+  end
+
   private
 
   def marker_pattern(line)
     line[/^-+(?=\s)/]
   end
-end
 
-require_relative 'unordered_list_items.rb'
+  class UnorderedListItems < ListMarker
+    def initialize(line, lines, current_line_index)
+      super(line, lines, current_line_index, '<ul>', '</ul>')
+    end
 
-class OrderedListItems < ListMarker
-  def initialize(line, lines, current_line_index)
-    super(line, lines, current_line_index, '<ol>', '</ol>')
+    def self.is_present(line)
+      return false if line.nil?
+
+      line.start_with?('-')
+    end
   end
 
-  def self.is_present(line)
-    return false if line.nil?
+  class OrderedListItems < ListMarker
+    def initialize(line, lines, current_line_index)
+      super(line, lines, current_line_index, '<ol>', '</ol>')
+    end
 
-    line =~ /^\d+\.\s/
-  end
+    def self.is_present(line)
+      return false if line.nil?
 
-  private
+      line =~ /^\d+\.\s/
+    end
 
-  def marker_pattern(line)
-    line[/^\d+\.(?=\s)/]
+    private
+
+    def marker_pattern(line)
+      line[/^\d+\.(?=\s)/]
+    end
   end
 end
