@@ -5,8 +5,6 @@
 class BoldMarker
   def initialize(lines, current_line_index)
     @line = lines[current_line_index]
-    @lines = lines
-    @index = current_line_index
   end
 
   def self.present?(line)

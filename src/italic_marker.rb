@@ -3,10 +3,8 @@
 # Handles conversion of italic markdown syntax to HTML
 # Processes both * and _ style italic markers to <i> tags
 class ItalicMarker
-  def initialize(line, lines, current_line_index)
-    @line = line
-    @lines = lines
-    @index = current_line_index
+  def initialize(lines, current_line_index)
+    @line = lines[current_line_index]
   end
 
   def self.present?(line)
