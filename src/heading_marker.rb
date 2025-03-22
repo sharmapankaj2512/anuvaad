@@ -7,10 +7,8 @@ require_relative 'text'
 class HeadingMarker
   include Text
 
-  def initialize(line, lines, current_line_index)
-    @line = line
-    @lines = lines
-    @index = current_line_index
+  def initialize(lines, current_line_index)
+    @line = lines[current_line_index]
   end
 
   def self.present?(line)

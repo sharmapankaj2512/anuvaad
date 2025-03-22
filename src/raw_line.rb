@@ -14,7 +14,7 @@ class RawLine
     return ItalicMarker.new(@lines, @current_line_index) if ItalicMarker.present?(@line)
     return ListMarker.make(@lines, @current_line_index) if ListMarker.present?(@line)
 
-    HeadingMarker.new(@line, @lines, @current_line_index) if HeadingMarker.present?(@line)
+    HeadingMarker.new(@lines, @current_line_index) if HeadingMarker.present?(@line)
   end
 end
 
