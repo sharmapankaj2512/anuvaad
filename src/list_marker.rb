@@ -1,25 +1,21 @@
-require_relative 'text'
-
 class ListMarker
   include Text
 
-  def initialize(line, lines, current_line_index, start_tag, end_tag)
+  def initialize(line, lines, current_line_index)
     @line = line
     @lines = lines
     @index = current_line_index
-    @start_tag = start_tag
-    @end_tag = end_tag
   end
 
   def to_html
-    marked_list_items, lines_processed = list_markers(@index, @line, @lines)
-    [list_items_to_html(marked_list_items), lines_processed]
+    list_items, index = list_markers(@index, @line, @lines)
+    [list_items_to_html(list_items), index]
   end
 
   def list_markers(start_index, line, lines)
     index = start_index
     list_items = []
-    while self.class.is_present(line)
+    while ListMarker.is_present(line)
       list_items << line
       index += 1
       line = lines[index]
@@ -28,53 +24,23 @@ class ListMarker
   end
 
   def list_items_to_html(list_items)
-    html = String.new(@start_tag)
+    html = String.new('<ul>')
     list_items.each do |list_item|
       html << list_marker_to_html(list_item)
     end
-    html << @end_tag
+    html << '</ul>'
     html
   end
 
   def list_marker_to_html(line)
-    marker = marker_pattern(line)
+    marker = line[/^-+(?=\s)/]
     inline_text = text_after(marker, line)
     "<li>#{inline_text}</li>"
-  end
-
-  private
-
-  def marker_pattern(line)
-    line[/^-+(?=\s)/]
-  end
-end
-
-class UnorderedListItems < ListMarker
-  def initialize(line, lines, current_line_index)
-    super(line, lines, current_line_index, '<ul>', '</ul>')
   end
 
   def self.is_present(line)
     return false if line.nil?
 
     line.start_with?('-')
-  end
-end
-
-class OrderedListItems < ListMarker
-  def initialize(line, lines, current_line_index)
-    super(line, lines, current_line_index, '<ol>', '</ol>')
-  end
-
-  def self.is_present(line)
-    return false if line.nil?
-
-    line =~ /^\d+\.\s/
-  end
-
-  private
-
-  def marker_pattern(line)
-    line[/^\d+\.(?=\s)/]
   end
 end
