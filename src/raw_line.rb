@@ -12,3 +12,8 @@ class RawLine
     HeadingMarker.new(@line, lines, current_line_index) if HeadingMarker.is_present(@line)
   end
 end
+
+require_relative 'bold_marker'
+require_relative 'italic_marker'
+require_relative 'list_marker'
+require_relative 'heading_marker'

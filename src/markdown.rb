@@ -34,8 +34,4 @@ class Markdown
 end
 
 require_relative 'raw_line'
-require_relative 'heading_marker'
-require_relative 'bold_marker'
-require_relative 'italic_marker'
-require_relative 'list_marker'
 
