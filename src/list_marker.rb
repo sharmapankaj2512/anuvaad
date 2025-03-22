@@ -84,7 +84,8 @@ class ListMarker
     def self.present?(line)
       return false if line.nil?
 
-      line =~ /^\d+\.\s/
+      ordered_list_pattern = /^\d+\.\s/
+      line =~ ordered_list_pattern
     end
 
     private
