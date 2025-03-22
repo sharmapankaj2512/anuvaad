@@ -7,8 +7,7 @@ require_relative 'text'
 class ListMarker
   include Text
 
-  def initialize(line, lines, current_line_index, start_tag, end_tag)
-    @line = line
+  def initialize(lines, current_line_index, start_tag, end_tag)
     @lines = lines
     @index = current_line_index
     @start_tag = start_tag
@@ -46,10 +45,10 @@ class ListMarker
   end
 
   def self.make(lines, current_line_index)
-    line = lines[current_line_index]
-    return UnorderedListItems.new(line, lines, current_line_index) if UnorderedListItems.present?(line)
+    line = lines.at(current_line_index)
+    return UnorderedListItems.new(lines, current_line_index) if UnorderedListItems.present?(line)
 
-    OrderedListItems.new(line, lines, current_line_index) if OrderedListItems.present?(line)
+    OrderedListItems.new(lines, current_line_index) if OrderedListItems.present?(line)
   end
 
   def self.present?(line)
@@ -64,8 +63,8 @@ class ListMarker
 
   # Handles unordered list items using the hyphen (-) syntax
   class UnorderedListItems < ListMarker
-    def initialize(line, lines, current_line_index)
-      super(line, lines, current_line_index, '<ul>', '</ul>')
+    def initialize(lines, current_line_index)
+      super(lines, current_line_index, '<ul>', '</ul>')
     end
 
     def self.present?(line)
@@ -77,8 +76,8 @@ class ListMarker
 
   # Handles ordered list items using the number followed by period syntax (1., 2., etc.)
   class OrderedListItems < ListMarker
-    def initialize(line, lines, current_line_index)
-      super(line, lines, current_line_index, '<ol>', '</ol>')
+    def initialize(lines, current_line_index)
+      super(lines, current_line_index, '<ol>', '</ol>')
     end
 
     def self.present?(line)
