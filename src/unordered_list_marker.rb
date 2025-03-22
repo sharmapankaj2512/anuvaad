@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Handles conversion of unordered lists (- syntax) to HTML <ul> and <li> tags
+# Note: This appears to be a deprecated or redundant class as functionality is in list_marker.rb
 class ListMarker
   include Text
 
@@ -15,7 +19,7 @@ class ListMarker
   def list_markers(start_index, line, lines)
     index = start_index
     list_items = []
-    while ListMarker.is_present(line)
+    while ListMarker.present?(line)
       list_items << line
       index += 1
       line = lines[index]
@@ -38,7 +42,7 @@ class ListMarker
     "<li>#{inline_text}</li>"
   end
 
-  def self.is_present(line)
+  def self.present?(line)
     return false if line.nil?
 
     line.start_with?('-')

@@ -39,5 +39,4 @@ class HeadingsTest < Minitest::Test
   end
 end
 
-require_relative '../src/markdown.rb'
-
+require_relative '../src/markdown'

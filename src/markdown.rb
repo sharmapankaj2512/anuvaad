@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
+# Markdown parser that converts markdown text to HTML
+# Processes content line by line, converting markdown syntax to corresponding HTML tags
 class Markdown
-
   def initialize(content)
     @content = content
   end
@@ -30,8 +31,6 @@ class Markdown
     html_content, lines_processed = mark_down.to_html
     [html_content, lines_processed]
   end
-
 end
 
 require_relative 'raw_line'
-

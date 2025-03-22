@@ -1,5 +1,9 @@
+# frozen_string_literal: true
+
 require_relative 'text'
 
+# Base class for handling markdown list syntax conversion to HTML
+# Supports both ordered and unordered lists with appropriate HTML tags
 class ListMarker
   include Text
 
@@ -19,7 +23,7 @@ class ListMarker
   def list_markers(start_index, line, lines)
     index = start_index
     list_items = []
-    while self.class.is_present(line)
+    while self.class.present?(line)
       list_items << line
       index += 1
       line = lines[index]
@@ -43,13 +47,13 @@ class ListMarker
   end
 
   def self.make(line, lines, current_line_index)
-    return UnorderedListItems.new(line, lines, current_line_index) if UnorderedListItems.is_present(line)
+    return UnorderedListItems.new(line, lines, current_line_index) if UnorderedListItems.present?(line)
 
-    OrderedListItems.new(line, lines, current_line_index) if OrderedListItems.is_present(line)
+    OrderedListItems.new(line, lines, current_line_index) if OrderedListItems.present?(line)
   end
 
-  def self.is_present(line)
-    UnorderedListItems.is_present(line) || OrderedListItems.is_present(line)
+  def self.present?(line)
+    UnorderedListItems.present?(line) || OrderedListItems.present?(line)
   end
 
   private
@@ -58,24 +62,26 @@ class ListMarker
     line[/^-+(?=\s)/]
   end
 
+  # Handles unordered list items using the hyphen (-) syntax
   class UnorderedListItems < ListMarker
     def initialize(line, lines, current_line_index)
       super(line, lines, current_line_index, '<ul>', '</ul>')
     end
 
-    def self.is_present(line)
+    def self.present?(line)
       return false if line.nil?
 
       line.start_with?('-')
     end
   end
 
+  # Handles ordered list items using the number followed by period syntax (1., 2., etc.)
   class OrderedListItems < ListMarker
     def initialize(line, lines, current_line_index)
       super(line, lines, current_line_index, '<ol>', '</ol>')
     end
 
-    def self.is_present(line)
+    def self.present?(line)
       return false if line.nil?
 
       line =~ /^\d+\.\s/
