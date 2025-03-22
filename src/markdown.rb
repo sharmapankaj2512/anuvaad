@@ -8,17 +8,20 @@ class Markdown
 
   def to_html
     html = String.new
-    lines = @content.split("\n")
-    current_line_index = 0
-    while current_line_index < lines.length
-      html_content, lines_processed = to_html_line(current_line_index, lines)
-      current_line_index += lines_processed
+    current_index = 0
+    while current_index < markdown_lines.length
+      html_content, lines_processed = to_html_line(current_index, markdown_lines)
+      current_index += lines_processed
       html << html_content
     end
     html
   end
 
   private
+
+  def markdown_lines
+    @content.split("\n")
+  end
 
   def to_html_line(current_line_index, lines)
     line = lines[current_line_index]
