@@ -16,17 +16,16 @@ class ListMarker
   end
 
   def to_html
-    marked_list_items = group_list_items(@index, @line, @lines)
+    marked_list_items = group_list_items(@lines, @index)
     [list_items_to_html(marked_list_items), marked_list_items.length]
   end
 
-  def group_list_items(start_index, line, lines)
+  def group_list_items(lines, start_index)
     index = start_index
     list_items = []
-    while self.class.present?(line)
-      list_items << line
+    while self.class.present?(lines[index])
+      list_items << lines[index]
       index += 1
-      line = lines[index]
     end
     list_items
   end
