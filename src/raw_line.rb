@@ -14,6 +14,7 @@ class RawLine
     return ItalicMarker.new(@lines, @current_line_index) if ItalicMarker.present?(@line)
     return ListMarker.make(@lines, @current_line_index) if ListMarker.present?(@line)
     return LinkMarker.new(@lines, @current_line_index) if LinkMarker.present?(@line)
+    return ImageMarker.new(@lines, @current_line_index) if ImageMarker.present?(@line)
 
     HeadingMarker.new(@lines, @current_line_index) if HeadingMarker.present?(@line)
   end
@@ -38,6 +39,24 @@ class LinkMarker
       text = Regexp.last_match(1)
       link = Regexp.last_match(2)
       return ["<a href=\"#{link}\">#{text}</a>", 1]
+    end
+  end
+end
+
+class ImageMarker
+  def initialize(lines, current_line_index)
+    @line = lines[current_line_index]
+  end
+
+  def self.present?(line)
+    line.match?(/!\[(.*?)\]\((.*?)\)/)
+  end
+
+  def to_html
+    @line.gsub(/!\[(.*?)\]\((.*?)\)/) do |_|
+      text = Regexp.last_match(1)
+      link = Regexp.last_match(2)
+      return ["<img src=\"#{link}\" alt=\"#{text}\"/>", 1]
     end
   end
 end
