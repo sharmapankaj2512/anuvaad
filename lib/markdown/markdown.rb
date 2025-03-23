@@ -54,11 +54,11 @@ class Markdown
   end
 end
 
-require_relative 'bold_marker'
-require_relative 'italic_marker'
-require_relative 'list_marker'
-require_relative 'heading_marker'
-require_relative 'link_marker'
-require_relative 'image_marker'
-require_relative 'no_marker'
+require_relative 'markers/bold_marker'
+require_relative 'markers/italic_marker'
+require_relative 'markers/list_marker'
+require_relative 'markers/heading_marker'
+require_relative 'markers/link_marker'
+require_relative 'markers/image_marker'
+require_relative 'markers/no_marker'
 
