@@ -22,12 +22,10 @@ class Markdown
   private
 
   def markdown_lines
-    @content.split("\n")
+    @content.split("\n").reject(&:empty?)
   end
 
   def to_html_line(lines, current_line_index)
-    return ['', 1] if lines[current_line_index].empty?
-
     raw_line = RawLine.new(lines, current_line_index)
     mark_down = raw_line.to_markdown
     html_content, lines_processed = mark_down.to_html
