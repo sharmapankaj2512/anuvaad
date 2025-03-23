@@ -26,49 +26,8 @@ require_relative 'italic_marker'
 require_relative 'list_marker'
 require_relative 'heading_marker'
 
-class LinkMarker
-  def initialize(lines, current_line_index)
-    @line = lines[current_line_index]
-  end
+require_relative 'link_marker.rb'
 
-  def self.present?(line)
-    line.match?(/(?<!\!)\[[^\]]+\]\([^)]+\)/
-    )
-  end
+require_relative 'image_marker.rb'
 
-  def to_html
-    @line.gsub(/\[(.*?)\]\((.*?)\)/) do |_|
-      text = Regexp.last_match(1)
-      link = Regexp.last_match(2)
-      return ["<a href=\"#{link}\">#{text}</a>", 1]
-    end
-  end
-end
-
-class ImageMarker
-  def initialize(lines, current_line_index)
-    @line = lines[current_line_index]
-  end
-
-  def self.present?(line)
-    line.match?(/!\[(.*?)\]\((.*?)\)/)
-  end
-
-  def to_html
-    @line.gsub(/!\[(.*?)\]\((.*?)\)/) do |_|
-      text = Regexp.last_match(1)
-      link = Regexp.last_match(2)
-      return ["<img src=\"#{link}\" alt=\"#{text}\"/>", 1]
-    end
-  end
-end
-
-class NoMarker
-  def initialize(lines, current_line_index)
-    @line = lines[current_line_index]
-  end
-
-  def to_html
-    "Error processing #{@line}"
-  end
-end
+require_relative 'no_marker.rb'
