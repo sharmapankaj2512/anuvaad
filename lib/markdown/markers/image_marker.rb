@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Handles conversion of image markdown syntax to HTML
+# Processes ![]() markers to <img> tags
 class ImageMarker
   def initialize(lines, current_line_index)
     @line = lines[current_line_index]
