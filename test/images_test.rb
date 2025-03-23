@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
-require_relative '../src/markdown'
+require_relative '../lib/markdown'
 
 class ImagesTest < Minitest::Test
   def test_single_image

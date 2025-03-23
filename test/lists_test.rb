@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
-require_relative '../src/markdown'
+require_relative '../lib/markdown'
 
 class ListsTest < Minitest::Test
   def test_single_unordered_list_item

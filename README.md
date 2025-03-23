@@ -13,7 +13,7 @@ A simple multi-purpose converter written in Ruby, which supports only markdown t
 ## Usage
 
 ```ruby
-require_relative 'src/markdown'
+require_relative 'lib/markdown'
 
 markdown_text = "# Hello World\n\nThis is **bold** and this is _italic_.\n\n- List item 1\n- List item 2"
 html = Markdown.new(markdown_text).to_html
