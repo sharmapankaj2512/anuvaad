@@ -61,4 +61,3 @@ require_relative 'markers/heading_marker'
 require_relative 'markers/link_marker'
 require_relative 'markers/image_marker'
 require_relative 'markers/no_marker'
-
