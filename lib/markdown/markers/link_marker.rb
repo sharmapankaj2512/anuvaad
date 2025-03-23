@@ -4,8 +4,7 @@ class LinkMarker
   end
 
   def self.present?(line)
-    line.match?(/(?<!\!)\[[^\]]+\]\([^)]+\)/
-    )
+    line.match?(/(?<!\!)\[[^\]]+\]\([^)]+\)/)
   end
 
   def to_html
