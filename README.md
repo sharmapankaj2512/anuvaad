@@ -1,12 +1,14 @@
 # Anuvaad
 
-A simple Markdown-to-HTML converter written in Ruby.
+A simple multi-purpose converter written in Ruby, which supports only markdown to html at the moment.
 
 ## Features
-
-- Heading support (h1-h6)
-- Text formatting (bold, italic)
-- Lists (ordered and unordered)
+- Markdown
+  - Heading support (h1-h6)
+  - Text formatting (bold, italic)
+  - Lists (ordered and unordered)
+  - Links
+  - Images
 
 ## Usage
 
