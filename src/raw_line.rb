@@ -15,8 +15,9 @@ class RawLine
     return ListMarker.make(@lines, @current_line_index) if ListMarker.present?(@line)
     return LinkMarker.new(@lines, @current_line_index) if LinkMarker.present?(@line)
     return ImageMarker.new(@lines, @current_line_index) if ImageMarker.present?(@line)
+    return HeadingMarker.new(@lines, @current_line_index) if HeadingMarker.present?(@line)
 
-    HeadingMarker.new(@lines, @current_line_index) if HeadingMarker.present?(@line)
+    NoMarker.new(@lines, @current_line_index)
   end
 end
 
@@ -59,5 +60,15 @@ class ImageMarker
       link = Regexp.last_match(2)
       return ["<img src=\"#{link}\" alt=\"#{text}\"/>", 1]
     end
+  end
+end
+
+class NoMarker
+  def initialize(lines, current_line_index)
+    @line = lines[current_line_index]
+  end
+
+  def to_html
+    "Error processing #{@line}"
   end
 end
