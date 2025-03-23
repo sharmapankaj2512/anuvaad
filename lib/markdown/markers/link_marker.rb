@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Handles conversion of links markdown syntax to HTML
+# Processes []() style bold markers to <a> tags
 class LinkMarker
   def initialize(lines, current_line_index)
     @line = lines[current_line_index]
