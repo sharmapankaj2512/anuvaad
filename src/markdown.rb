@@ -12,7 +12,7 @@ class Markdown
     current_index = 0
     lines = markdown_lines
     while current_index < lines.length
-      html_content, lines_processed = to_html_line(current_index, lines)
+      html_content, lines_processed = to_html_line(lines, current_index)
       current_index += lines_processed
       html << html_content
     end
@@ -25,7 +25,7 @@ class Markdown
     @content.split("\n")
   end
 
-  def to_html_line(current_line_index, lines)
+  def to_html_line(lines, current_line_index)
     return ['', 1] if lines[current_line_index].empty?
 
     raw_line = RawLine.new(lines, current_line_index)
