@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
+require_relative '../../lib/markdown/markdown'
 
 class HeadingsTest < Minitest::Test
   def test_heading_one
@@ -39,4 +40,3 @@ class HeadingsTest < Minitest::Test
   end
 end
 
-require_relative '../lib/markdown/markdown'

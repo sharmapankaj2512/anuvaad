@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
+require_relative '../../lib/markdown/markdown'
 
 class ItalicTest < Minitest::Test
   def test_single_italic_occurrence

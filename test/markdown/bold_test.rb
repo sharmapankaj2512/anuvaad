@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
+require_relative '../../lib/markdown/markdown'
 
 class BoldTest < Minitest::Test
   def test_single_bold_occurrence
