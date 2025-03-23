@@ -21,13 +21,13 @@ class RawLine
   end
 end
 
-require_relative 'bold_marker'
-require_relative 'italic_marker'
-require_relative 'list_marker'
-require_relative 'heading_marker'
+require_relative 'markdown/bold_marker'
+require_relative 'markdown/italic_marker'
+require_relative 'markdown/list_marker'
+require_relative 'markdown/heading_marker'
 
-require_relative 'link_marker.rb'
+require_relative 'markdown/link_marker.rb'
 
-require_relative 'image_marker.rb'
+require_relative 'markdown/image_marker.rb'
 
-require_relative 'no_marker.rb'
+require_relative 'markdown/no_marker.rb'

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'text'
+require_relative '../text'
 
 # Processes markdown headings (# syntax) and converts them to HTML heading tags
 # Supports heading levels 1-6 with corresponding h1-h6 HTML tags

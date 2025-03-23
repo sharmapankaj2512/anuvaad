@@ -33,4 +33,4 @@ class Markdown
   end
 end
 
-require_relative 'raw_line'
+require_relative '../raw_line'

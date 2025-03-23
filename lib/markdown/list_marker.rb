@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'text'
+require_relative '../text'
 
 # Base class for handling markdown list syntax conversion to HTML
 # Supports both ordered and unordered lists with appropriate HTML tags
