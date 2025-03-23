@@ -10,8 +10,9 @@ class Markdown
   def to_html
     html = String.new
     current_index = 0
-    while current_index < markdown_lines.length
-      html_content, lines_processed = to_html_line(current_index, markdown_lines)
+    lines = markdown_lines
+    while current_index < lines.length
+      html_content, lines_processed = to_html_line(current_index, lines)
       current_index += lines_processed
       html << html_content
     end
@@ -25,6 +26,8 @@ class Markdown
   end
 
   def to_html_line(current_line_index, lines)
+    return ['', 1] if lines[current_line_index].empty?
+
     raw_line = RawLine.new(lines, current_line_index)
     mark_down = raw_line.to_markdown
     html_content, lines_processed = mark_down.to_html
