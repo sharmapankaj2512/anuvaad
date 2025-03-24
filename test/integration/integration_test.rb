@@ -10,4 +10,11 @@ class IntegrationTest < Minitest::Test
 
     assert_equal Markdown.new(markdown).to_html, html
   end
+
+  def test_nested_markdown
+    markdown = File.read(File.join(__dir__, 'input_nested_markdown.md'))
+    html = File.read(File.join(__dir__, 'nested_output.html'))
+
+    assert_equal Markdown.new(markdown).to_html, html
+  end
 end

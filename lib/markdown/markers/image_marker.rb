@@ -12,6 +12,7 @@ class ImageMarker
   end
 
   def to_html
+    @line.gsub(/!\[(.*?)\]\((.*?)\)/, '<img href="\2" alt=""\ 1/>')
     @line.gsub(/!\[(.*?)\]\((.*?)\)/) do |_|
       text = Regexp.last_match(1)
       link = Regexp.last_match(2)

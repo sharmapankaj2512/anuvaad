@@ -12,10 +12,6 @@ class LinkMarker
   end
 
   def to_html
-    @line.gsub(/\[(.*?)\]\((.*?)\)/) do |_|
-      text = Regexp.last_match(1)
-      link = Regexp.last_match(2)
-      return ["<a href=\"#{link}\">#{text}</a>", 1]
-    end
+    @line.gsub(/\[(.*?)\]\((.*?)\)/, '<a href="\2">\1</a>')
   end
 end
