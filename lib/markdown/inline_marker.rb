@@ -1,4 +1,15 @@
 class InlineMarker
+  @@registered_markers = []
+
+  def self.register_marker(marker_class)
+    @@registered_markers << marker_class
+  end
+
+  register_marker BoldMarker
+  register_marker ItalicMarker
+  register_marker LinkMarker
+  register_marker ImageMarker
+
   def initialize(lines, current_line_index)
     @lines = lines
     @current_line_index = current_line_index
@@ -12,17 +23,11 @@ class InlineMarker
   end
 
   def to_html
-    if BoldMarker.present?(@lines[@current_line_index])
-      @lines[@current_line_index], = BoldMarker.new(@lines, @current_line_index).to_html
-    end
-    if ItalicMarker.present?(@lines[@current_line_index])
-      @lines[@current_line_index], = ItalicMarker.new(@lines, @current_line_index).to_html
-    end
-    if LinkMarker.present?(@lines[@current_line_index])
-      @lines[@current_line_index], = LinkMarker.new(@lines, @current_line_index).to_html
-    end
-    if ImageMarker.present?(@lines[@current_line_index])
-      @lines[@current_line_index], = ImageMarker.new(@lines, @current_line_index).to_html
+    @@registered_markers.each do |marker_class|
+      if marker_class.present?(@lines[@current_line_index])
+        marker = marker_class.new(@lines, @current_line_index)
+        @lines[@current_line_index], = marker.to_html
+      end
     end
     [@lines[@current_line_index], 1]
   end
