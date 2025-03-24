@@ -16,10 +16,7 @@ class InlineMarker
   end
 
   def self.present?(line)
-    BoldMarker.present?(line) ||
-      ItalicMarker.present?(line) ||
-      LinkMarker.present?(line) ||
-      ImageMarker.present?(line)
+    @@registered_markers.any? { |marker_class| marker_class.present?(line) }
   end
 
   def to_html
