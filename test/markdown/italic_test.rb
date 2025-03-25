@@ -5,6 +5,6 @@ require_relative '../../lib/markdown/markdown'
 
 class ItalicTest < Minitest::Test
   def test_single_italic_occurrence
-    assert_equal Markdown.new('*ultimate text*').to_html, '<i>ultimate text</i>'
+    assert_equal '<i>ultimate text</i>', Markdown.new('*ultimate text*').to_html
   end
 end
