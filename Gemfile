@@ -8,6 +8,8 @@ group :test do
   gem 'simplecov'
 end
 
-gem 'rubocop', group: 'development', require: false
-gem 'rubocop-minitest', group: 'development', require: false
-gem 'rubocop-rake', group: 'development', require: false
+group :development do
+  gem 'rubocop'
+  gem 'rubocop-minitest'
+  gem 'rubocop-rake'
+end
