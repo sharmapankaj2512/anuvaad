@@ -9,3 +9,5 @@ group :test do
 end
 
 gem 'rubocop', group: 'development', require: false
+gem 'rubocop-minitest', group: 'development', require: false
+gem 'rubocop-rake', group: 'development', require: false
