@@ -39,4 +39,3 @@ class HeadingsTest < Minitest::Test
     assert_equal markdown.to_html, '<h1>The ultimate heading</h1><h3>Tomorrow never dies</h3>'
   end
 end
-

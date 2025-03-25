@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InlineCodeMarker
   def initialize(lines, current_line_index)
     @line = lines[current_line_index]
