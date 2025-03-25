@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Handles conversion of inline markers syntax to respective HTML tags
 class InlineMarker
   @@registered_markers = []
 
