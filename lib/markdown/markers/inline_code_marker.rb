@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Handles conversion of inline code markdown syntax to HTML
+# Processes `` style inline code markers to <code> tags
 class InlineCodeMarker
   def initialize(lines, current_line_index)
     @line = lines[current_line_index]
