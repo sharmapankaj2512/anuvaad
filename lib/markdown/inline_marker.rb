@@ -9,6 +9,7 @@ class InlineMarker
   register_marker ItalicMarker
   register_marker LinkMarker
   register_marker ImageMarker
+  register_marker InlineCodeMarker
 
   def initialize(lines, current_line_index)
     @lines = lines
